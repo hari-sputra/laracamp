@@ -27,7 +27,7 @@
                     <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Halo, {{ Auth::user()->name }}!
                         <img @if (Auth::user()->avatar != null) src="{{ Auth::user()->avatar }}" @else src="{{ asset('images/user_photo.png') }}" @endif
-                            class="user-photo" alt="">
+                            class="user-photo rounded-circle" alt="">
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="right: 0; left: auto">
                             <li>

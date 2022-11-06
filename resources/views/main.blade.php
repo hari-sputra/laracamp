@@ -3,6 +3,13 @@
 @section('content')
     @include('components.navbar')
 
+    {{-- <div class="alert {{ Session::get('alert-class') }} alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+        {{ Session::get('message') }}
+    </div> --}}
+
+
+
     <section class="banner">
         <div class="container">
             <div class="row justify-content-center">
@@ -198,76 +205,25 @@
                         <div class="col-lg-6 col-12">
                             <div class="table-pricing paket-gila">
                                 <p class="story text-center">
-                                    GILA BELAJAR
+                                    {{ $camps[0]->title }}
                                 </p>
                                 <h1 class="price text-center">
-                                    $280K
+                                    ${{ $camps[0]->price }}K
                                 </h1>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        Pro Techstack Kit
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        iMac Pro 2021 & Display
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        1-1 Mentoring Program
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        Final Project Certificate
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        Offline Course Videos
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        Future Job Opportinity
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        Premium Design Kit
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        Website Builder
-                                    </p>
-                                    <div class="clear"></div>
-                                </div>
+                                @foreach ($campBenefits->where('camp_id', 1) as $campBenefit)
+                                    <div class="item-benefit-pricing mb-4">
+                                        <img src="{{ asset('images/ic_check.svg') }}" alt="">
+                                        <p>
+                                            {{ $campBenefit->name }}
+                                        </p>
+                                        <div class="clear"></div>
+                                        <div class="divider"></div>
+                                    </div>
+                                @endforeach
+
                                 <p>
-                                    <a href="/checkout" class="btn btn-master btn-primary w-100 mt-3">
+                                    <a href="{{ route('checkout', $camps[0]->slug) }}"
+                                        class="btn btn-master btn-primary w-100 mt-3">
                                         Take This Plan
                                     </a>
                                 </p>
@@ -276,44 +232,26 @@
                         <div class="col-lg-6 col-12">
                             <div class="table-pricing paket-biasa">
                                 <p class="story text-center">
-                                    BARU MULAI
+                                    {{ $camps[1]->title }}
                                 </p>
                                 <h1 class="price text-center">
-                                    $140K
+                                    ${{ $camps[1]->price }}K
                                 </h1>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        1-1 Mentoring Program
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        Final Project Certificate
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing mb-4">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        Offline Course Videos
-                                    </p>
-                                    <div class="clear"></div>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing">
-                                    <img src="{{ asset('images/ic_check.svg') }}" alt="">
-                                    <p>
-                                        Future Job Opportinity
-                                    </p>
-                                    <div class="clear"></div>
-                                </div>
+
+                                @foreach ($campBenefits->where('camp_id', 2) as $campBenefit)
+                                    <div class="item-benefit-pricing mb-4">
+                                        <img src="{{ asset('images/ic_check.svg') }}" alt="">
+                                        <p>
+                                            {{ $campBenefit->name }}
+                                        </p>
+                                        <div class="clear"></div>
+                                        <div class="divider"></div>
+                                    </div>
+                                @endforeach
+
                                 <p>
-                                    <a href="/checkout" class="btn btn-master btn-secondary w-100 mt-3">
+                                    <a href="{{ route('checkout', $camps[1]->slug) }}"
+                                        class="btn btn-master btn-secondary w-100 mt-3">
                                         Start With This Plan
                                     </a>
                                 </p>
