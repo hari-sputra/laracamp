@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\Checkout\Store;
 use App\Models\Camp;
 use App\Models\CampBenefit;
 use App\Models\Checkout;
@@ -27,14 +28,18 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Camp $camp)
+    public function create(Camp $camp, Request $request)
     {
 
         $user = Auth::user();
         if (!$user) {
-            session()->flash('message', "Please Login before Checkout!!");
-            session()->flash('alert-class', 'alert-danger');
+            session()->flash('error', "Please Login before Checkout!!");
             return redirect(route('login'));
+        }
+
+        if ($camp->isRegistered) {
+            session()->flash('error', "You already registered on {$camp->title} camp.");
+            return redirect(route('dashboard'));
         }
         return view('checkout.create', compact('camp', 'user'));
     }
@@ -45,8 +50,9 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Camp $camp)
+    public function store(Store $request, Camp $camp)
     {
+        return $request->all();
         // mapping data
         $data = $request->all();
         $data['user_id'] = Auth::id();

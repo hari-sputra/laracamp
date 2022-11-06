@@ -17,7 +17,7 @@
                     </h2>
                 </div>
             </div>
-
+            @include('components.alert')
             <div class="row my-5">
                 <table class="table">
                     <tbody>

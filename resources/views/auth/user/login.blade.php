@@ -2,15 +2,16 @@
 @section('title', 'Laracamp - Login')
 
 @section('content')
-    <div class="alert {{ Session::get('alert-class') }} text-end" role="alert">
-        {{ Session::get('message') }}
-    </div>
+
+
 
     <section class="login-user">
         <div class="left">
             <img src="{{ asset('images/ill_login_new.png') }}" alt="">
         </div>
         <div class="right">
+            @include('components.alert')
+
             <img src="{{ asset('images/logo.png') }}" class="logo" alt="">
             <h1 class="header-third">
                 Start Today
